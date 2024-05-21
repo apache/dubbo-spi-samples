@@ -43,7 +43,6 @@
 
     <modules>
         <module>spi-samples-configcenter</module>
-        <module>spi-samples-configcenter/spi-samples-configcenter-api</module>
         <module>tools</module>
     </modules>
 
