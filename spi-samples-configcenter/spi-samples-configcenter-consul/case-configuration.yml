@@ -20,7 +20,7 @@ services:
   dubbo-spi-samples-configcenter-consul:
     type: app
     basedir: .
-    mainClass: org.apache.dubbo.spi.samples.configcenter.EtcdProvider
+    mainClass: org.apache.dubbo.spi.samples.configcenter.ConsulProvider
     systemProps:
       - consul.address=consul
       - consul.port=8500
