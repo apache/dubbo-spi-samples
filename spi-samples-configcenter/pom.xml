@@ -30,6 +30,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>spi-samples-configcenter-etcd</module>
+        <module>spi-samples-configcenter-consul</module>
     </modules>
 
     <properties>
