@@ -15,23 +15,26 @@
   See the License for the specific language governing permissions and
   limitations under the License.
   -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
         <groupId>org.apache.dubbo</groupId>
         <artifactId>dubbo-samples-spi</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+
     <groupId>org.apache.dubbo</groupId>
-    <artifactId>tools</artifactId>
+    <artifactId>samples-spi-configcenter</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
-
-    <name>Tools</name>
-    <description>Dubbo Spi Samples Tools</description>
-
     <modules>
-        <module>embedded-zookeeper</module>
+        <module>samples-spi-configcenter-etcd</module>
+        <module>samples-spi-configcenter-consul</module>
     </modules>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
 </project>
