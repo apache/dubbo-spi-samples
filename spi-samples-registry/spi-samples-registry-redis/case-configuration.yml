@@ -44,7 +44,6 @@ services:
       - redis.address=redis
       - redis.port=2379
     waitPortsBeforeRun:
-      - dubbo-spi-samples-registry-redis:2181
       - dubbo-spi-samples-registry-redis:20880
       - redis:6379
     waitTimeout: 100
