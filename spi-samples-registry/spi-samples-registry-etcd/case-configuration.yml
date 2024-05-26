@@ -44,7 +44,6 @@ services:
       - etcd.address=etcd
       - etcd.port=2379
     waitPortsBeforeRun:
-      - dubbo-spi-samples-registry-etcd:2181
       - dubbo-spi-samples-registry-etcd:20880
       - etcd:2379
     waitTimeout: 100
