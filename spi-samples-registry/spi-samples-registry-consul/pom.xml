@@ -80,7 +80,7 @@
 
         <dependency>
             <groupId>org.apache.dubbo.extensions</groupId>
-            <artifactId>dubbo-registry-consul</artifactId>
+            <artifactId>dubbo-configcenter-consul</artifactId>
             <version>${spi.version}</version>
         </dependency>
 
