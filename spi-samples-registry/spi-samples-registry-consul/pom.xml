@@ -85,6 +85,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.apache.dubbo.extensions</groupId>
+            <artifactId>dubbo-registry-consul</artifactId>
+            <version>${spi.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.orbitz.consul</groupId>
             <artifactId>consul-client</artifactId>
         </dependency>
