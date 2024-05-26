@@ -18,6 +18,7 @@
 package configcenter;
 
 
+
 import org.apache.dubbo.spi.samples.registry.api.DemoService;
 
 import org.junit.Assert;
