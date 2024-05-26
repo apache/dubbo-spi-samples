@@ -104,8 +104,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       #'JOB_COUNT' MUST match 'job_id' list of 'testjob'
-#      JOB_COUNT: 5
-      JOB_COUNT: 1
+      JOB_COUNT: 5
+#      JOB_COUNT: 1
     steps:
       - uses: actions/checkout@v3
       - name: Prepare test list
@@ -130,8 +130,8 @@ jobs:
       matrix:
         java: [8, 11, 17, 21]
         #testjob id list MUST match 'JOB_COUNT' of 'prepare_test'
-#        job_id: [1,2,3,4,5]
-        job_id: [1]
+        job_id: [1,2,3,4,5]
+#        job_id: [1]
     steps:
       - uses: actions/checkout@v3
       - name: Set up JDK ${{matrix.java}}
