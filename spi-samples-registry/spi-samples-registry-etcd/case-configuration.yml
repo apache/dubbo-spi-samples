@@ -20,7 +20,7 @@ services:
   dubbo-spi-samples-registry-etcd:
     type: app
     basedir: .
-    mainClass: org.apache.dubbo.spi.samples.configcenter.EtcdProvider
+    mainClass: org.apache.dubbo.spi.samples.registry.EtcdProvider
     systemProps:
       - etcd.address=etcd
       - etcd.port=2379
