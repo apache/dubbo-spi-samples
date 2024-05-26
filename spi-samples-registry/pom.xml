@@ -22,6 +22,7 @@
         <module>spi-samples-registry-consul</module>
         <module>spi-samples-registry-etcd</module>
         <module>spi-samples-registry-redis</module>
+        <module>spi-samples-registry-nameservice</module>
     </modules>
 
 </project>
