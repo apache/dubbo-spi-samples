@@ -17,23 +17,22 @@
  *
  */
 
-package org.apache.dubbo.spi.samples.registry;
+package org.apache.dubbo.spi.samples.configcenter.impl;
 
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.apache.dubbo.rpc.RpcContext;
+import org.apache.dubbo.spi.samples.configcenter.api.DemoService;
 
-import java.util.concurrent.CountDownLatch;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-public class EtcdProvider {
+public class DemoServiceImpl implements DemoService {
 
-    public static void main(String[] args) throws Exception {
-        new EmbeddedZooKeeper(2181, false).start();
-//        EtcdUtil.start();
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"spring/configcenter-provider.xml"});
-        context.start();
-
-        System.out.println("dubbo service started");
-        new CountDownLatch(1).await();
+    @Override
+    public String sayHello(String name) {
+        System.out.println("[" + new SimpleDateFormat("HH:mm:ss").format(new Date()) + "] Hello " + name +
+                ", request from consumer: " + RpcContext.getContext().getRemoteAddress());
+        return "Hello " + name + ", response from provider: " + RpcContext.getContext().getLocalAddress();
     }
 
 }

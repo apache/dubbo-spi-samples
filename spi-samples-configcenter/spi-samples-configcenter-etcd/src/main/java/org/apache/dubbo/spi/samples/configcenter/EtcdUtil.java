@@ -17,7 +17,7 @@
  *
  */
 
-package org.apache.dubbo.spi.samples.registry;
+package org.apache.dubbo.spi.samples.configcenter;
 
 import io.etcd.jetcd.ByteSequence;
 import io.etcd.jetcd.Client;

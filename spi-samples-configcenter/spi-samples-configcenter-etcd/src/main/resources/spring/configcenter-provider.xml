@@ -31,8 +31,8 @@
 
     <dubbo:config-center address="etcd3://${etcd.address:localhost}:${etcd.port:2379}"/>
 
-    <bean id="demoService" class="org.apache.dubbo.spi.samples.registry.impl.DemoServiceImpl"/>
+    <bean id="demoService" class="org.apache.dubbo.spi.samples.configcenter.impl.DemoServiceImpl"/>
 
-    <dubbo:service interface="org.apache.dubbo.spi.samples.registry.api.DemoService" ref="demoService"/>
+    <dubbo:service interface="org.apache.dubbo.spi.samples.configcenter.api.DemoService" ref="demoService"/>
 
 </beans>

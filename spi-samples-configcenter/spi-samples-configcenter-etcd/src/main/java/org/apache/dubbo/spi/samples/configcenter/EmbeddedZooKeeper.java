@@ -18,7 +18,7 @@
  */
 
 
-package org.apache.dubbo.spi.samples.registry;
+package org.apache.dubbo.spi.samples.configcenter;
 
 import org.apache.zookeeper.server.ServerConfig;
 import org.apache.zookeeper.server.ZooKeeperServerMain;

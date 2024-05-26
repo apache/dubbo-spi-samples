@@ -17,22 +17,10 @@
  *
  */
 
-package org.apache.dubbo.spi.samples.registry;
+package org.apache.dubbo.spi.samples.configcenter.api;
 
+public interface DemoService {
 
-import org.apache.dubbo.spi.samples.registry.api.DemoService;
+    String sayHello(String name);
 
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-public class EtcdConsumer {
-
-    public static void main(String[] args) {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"spring/configcenter-consumer.xml"});
-        context.start();
-        DemoService demoService = context.getBean("demoService", DemoService.class);
-
-        String hello = demoService.sayHello("world");
-        System.out.println(hello);
-
-    }
 }
