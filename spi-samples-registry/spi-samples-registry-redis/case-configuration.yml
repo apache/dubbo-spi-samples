@@ -42,7 +42,7 @@ services:
       - dubbo.address=dubbo-spi-samples-registry-redis
       - dubbo.port=20880
       - redis.address=redis
-      - redis.port=2379
+      - redis.port=6379
     waitPortsBeforeRun:
       - dubbo-spi-samples-registry-redis:20880
       - redis:6379
