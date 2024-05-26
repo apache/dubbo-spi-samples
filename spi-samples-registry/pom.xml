@@ -9,6 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
+    <packaging>pom</packaging>
     <artifactId>spi-samples-registry</artifactId>
 
     <properties>
