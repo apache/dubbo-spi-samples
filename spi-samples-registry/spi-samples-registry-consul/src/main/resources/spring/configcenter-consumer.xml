@@ -25,7 +25,7 @@
        http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
     <context:property-placeholder/>
 
-    <dubbo:application name="dubbo-spi-configcenter-etcd-consumer"/>
+    <dubbo:application name="dubbo-spi-registry-etcd-consumer"/>
 
     <dubbo:registry address="consul://${consul.address:127.0.0.1}:${consul.port:8500}"/>
 

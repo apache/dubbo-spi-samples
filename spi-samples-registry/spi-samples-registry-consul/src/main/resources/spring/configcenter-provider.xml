@@ -25,12 +25,14 @@
        http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
     <context:property-placeholder/>
 
-    <dubbo:application name="dubbo-spi-configcenter-etcd-consumer"/>
+    <dubbo:application name="dubbo-spi-registry-etcd-provider"/>
 
     <dubbo:registry address="consul://${consul.address:127.0.0.1}:${consul.port:8500}"/>
 
-    <dubbo:config-center highest-priority="false" address="consul://${consul.address:127.0.0.1}:${consul.port:8500}"/>
+    <dubbo:config-center address="consul://${consul.address:127.0.0.1}:${consul.port:8500}"/>
 
-    <dubbo:reference id="demoService" interface="org.apache.dubbo.spi.samples.registry.api.DemoService"/>
+    <bean id="demoService" class="org.apache.dubbo.spi.samples.configcenter.impl.DemoServiceImpl"/>
+
+    <dubbo:service interface="org.apache.dubbo.spi.samples.configcenter.api.DemoService" ref="demoService"/>
 
 </beans>

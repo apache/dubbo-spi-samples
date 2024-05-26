@@ -31,6 +31,6 @@
 
     <dubbo:config-center highest-priority="false" address="etcd3://${etcd.address:localhost}:${etcd.port:2379}"/>
 
-    <dubbo:reference id="demoService" interface="org.apache.dubbo.spi.samples.configcenter.api.DemoService"/>
+    <dubbo:reference id="demoService" interface="org.apache.dubbo.spi.samples.registry.api.DemoService"/>
 
 </beans>

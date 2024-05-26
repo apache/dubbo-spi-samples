@@ -44,6 +44,7 @@
     <modules>
         <module>spi-samples-configcenter</module>
         <module>tools</module>
+        <module>spi-samples-registry</module>
     </modules>
 
     <dependencyManagement>
