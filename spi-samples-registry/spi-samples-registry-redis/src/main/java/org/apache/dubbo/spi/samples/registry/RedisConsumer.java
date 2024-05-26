@@ -17,10 +17,10 @@
  *
  */
 
-package org.apache.dubbo.spi.samples.redis;
+package org.apache.dubbo.spi.samples.registry;
 
 
-import org.apache.dubbo.spi.samples.redis.api.DemoService;
+import org.apache.dubbo.spi.samples.registry.api.DemoService;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

@@ -27,7 +27,7 @@
 
     <dubbo:application name="dubbo-spi-registry-etcd-provider"/>
 
-    <dubbo:registry address="etcd3://${etcd3.address:127.0.0.1}:${etcd3.port:2379}"/>
+    <dubbo:registry address="etcd3://${etcd.address:127.0.0.1}:${etcd.port:2379}"/>
 
     <dubbo:config-center address="etcd3://${etcd.address:localhost}:${etcd.port:2379}"/>
 

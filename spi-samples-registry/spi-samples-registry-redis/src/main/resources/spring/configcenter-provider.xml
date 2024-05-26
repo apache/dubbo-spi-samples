@@ -31,8 +31,8 @@
 
     <dubbo:config-center address="redis://${redis.address:localhost}:${redis.port:6379}"/>
 
-    <bean id="demoService" class="org.apache.dubbo.spi.samples.redis.impl.DemoServiceImpl"/>
+    <bean id="demoService" class="org.apache.dubbo.spi.samples.registry.impl.DemoServiceImpl"/>
 
-    <dubbo:service interface="org.apache.dubbo.spi.samples.redis.api.DemoService" ref="demoService"/>
+    <dubbo:service interface="org.apache.dubbo.spi.samples.registry.api.DemoService" ref="demoService"/>
 
 </beans>

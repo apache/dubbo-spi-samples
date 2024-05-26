@@ -17,11 +17,11 @@
  *
  */
 
-package org.apache.dubbo.spi.samples.redis.impl;
+package org.apache.dubbo.spi.samples.registry.impl;
 
 
 import org.apache.dubbo.rpc.RpcContext;
-import org.apache.dubbo.spi.samples.redis.api.DemoService;
+import org.apache.dubbo.spi.samples.registry.api.DemoService;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
