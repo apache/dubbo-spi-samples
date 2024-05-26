@@ -17,22 +17,21 @@
  *
  */
 
-package org.apache.dubbo.spi.samples.registry;
+package org.apache.dubbo.spi.samples.redis;
 
-
-import org.apache.dubbo.spi.samples.registry.api.DemoService;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class ConsulConsumer {
+import java.util.concurrent.CountDownLatch;
 
-    public static void main(String[] args) {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"spring/configcenter-consumer.xml"});
+public class RedisProvider {
+
+    public static void main(String[] args) throws Exception {
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"spring/configcenter-provider.xml"});
         context.start();
-        DemoService demoService = context.getBean("demoService", DemoService.class);
 
-        String hello = demoService.sayHello("world");
-        System.out.println(hello);
-
+        System.out.println("dubbo service started");
+        new CountDownLatch(1).await();
     }
+
 }

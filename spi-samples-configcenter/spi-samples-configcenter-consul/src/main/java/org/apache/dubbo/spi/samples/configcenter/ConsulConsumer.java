@@ -17,22 +17,22 @@
  *
  */
 
-package org.apache.dubbo.spi.samples.registry.impl;
+package org.apache.dubbo.spi.samples.configcenter;
 
 
-import org.apache.dubbo.rpc.RpcContext;
-import org.apache.dubbo.spi.samples.registry.api.DemoService;
+import org.apache.dubbo.spi.samples.configcenter.api.DemoService;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class DemoServiceImpl implements DemoService {
+public class ConsulConsumer {
 
-    @Override
-    public String sayHello(String name) {
-        System.out.println("[" + new SimpleDateFormat("HH:mm:ss").format(new Date()) + "] Hello " + name +
-                ", request from consumer: " + RpcContext.getContext().getRemoteAddress());
-        return "Hello " + name + ", response from provider: " + RpcContext.getContext().getLocalAddress();
+    public static void main(String[] args) {
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[]{"spring/configcenter-consumer.xml"});
+        context.start();
+        DemoService demoService = context.getBean("demoService", DemoService.class);
+
+        String hello = demoService.sayHello("world");
+        System.out.println(hello);
+
     }
-
 }

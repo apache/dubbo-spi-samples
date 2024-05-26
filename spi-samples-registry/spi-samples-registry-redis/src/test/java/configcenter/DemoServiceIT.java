@@ -18,8 +18,7 @@
 package registry;
 
 
-
-import org.apache.dubbo.spi.samples.configcenter.api.DemoService;
+import org.apache.dubbo.spi.samples.redis.api.DemoService;
 
 import org.junit.Assert;
 import org.junit.Test;

@@ -21,6 +21,7 @@
     <modules>
         <module>spi-samples-registry-consul</module>
         <module>spi-samples-registry-etcd</module>
+        <module>spi-samples-registry-redis</module>
     </modules>
 
 </project>
