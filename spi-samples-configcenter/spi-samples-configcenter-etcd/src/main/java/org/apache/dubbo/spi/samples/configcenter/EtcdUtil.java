@@ -41,7 +41,7 @@ public class EtcdUtil {
 
     public static void start() {
         try {
-            etcdCluster = EtcdClusterFactory.buildCluster(EtcdUtil.class.getSimpleName(), 1, false);
+            etcdCluster = EtcdClusterFactory.buildCluster(EtcdUtil.class.getSimpleName(), 3, false);
 
             etcdCluster.start();
             client = Client.builder().endpoints(etcdCluster.getClientEndpoints()).build();

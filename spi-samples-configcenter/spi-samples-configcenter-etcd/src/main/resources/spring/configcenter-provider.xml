@@ -27,9 +27,9 @@
 
     <dubbo:application name="dubbo-spi-configcenter-etcd-provider"/>
 
-    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
+    <dubbo:registry address="zookeeper://${zookeeper.address:127.0.0.1}:${zookeeper.port:2181}"/>
 
-    <dubbo:config-center address="etcd3://${etcd.address:localhost}:2379"/>
+    <dubbo:config-center address="etcd3://${etcd.address:localhost}:${etcd.port:2379}"/>
 
     <bean id="demoService" class="org.apache.dubbo.spi.samples.configcenter.impl.DemoServiceImpl"/>
 
