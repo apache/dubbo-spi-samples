@@ -19,7 +19,7 @@ services:
     basedir: .
     mainClass: org.apache.dubbo.samples.spi.protocol.http.HttpProvider
     systemProps:
-      - zookeeper.address=dubbo-samples-spi-http
+      - zookeeper.address=dubbo-samples-spi-http-jetty
       - zookeeper.port=2181
       - servlet.port=8081
       - servlet.container=jetty
