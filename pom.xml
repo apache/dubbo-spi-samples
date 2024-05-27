@@ -45,6 +45,7 @@
         <module>samples-spi-configcenter</module>
         <module>tools</module>
         <module>samples-spi-registry</module>
+        <module>samples-spi-serialization</module>
     </modules>
 
     <dependencyManagement>
