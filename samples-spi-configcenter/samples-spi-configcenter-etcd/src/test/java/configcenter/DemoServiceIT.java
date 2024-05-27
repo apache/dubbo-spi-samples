@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package registry;
+package configcenter;
 
 
 import org.apache.dubbo.samples.spi.configcenter.api.DemoService;

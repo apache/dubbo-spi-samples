@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>samples-spi-protocol-http</module>
+        <module>samples-spi-protocol-rmi</module>
     </modules>
 
     <properties>
