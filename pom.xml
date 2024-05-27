@@ -20,7 +20,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.apache.dubbo</groupId>
-    <artifactId>dubbo-spi-samples</artifactId>
+    <artifactId>dubbo-samples-spi</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>Dubbo Spi Samples</name>
@@ -42,8 +42,9 @@
     </properties>
 
     <modules>
-        <module>spi-samples-configcenter</module>
+        <module>samples-spi-configcenter</module>
         <module>tools</module>
+        <module>samples-spi-registry</module>
     </modules>
 
     <dependencyManagement>
