@@ -34,7 +34,7 @@
         <spi.version>3.2.0</spi.version>
         <dubbo.version>3.2.11</dubbo.version>
         <spring.version>4.3.30.RELEASE</spring.version>
-        <log4j2.version>2.17.2</log4j2.version>
+        <log4j2.version>2.17.1</log4j2.version>
         <junit.version>4.13.1</junit.version>
 
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
@@ -45,6 +45,7 @@
         <module>samples-spi-configcenter</module>
         <module>tools</module>
         <module>samples-spi-registry</module>
+        <module>samples-spi-protocol</module>
     </modules>
 
     <dependencyManagement>
