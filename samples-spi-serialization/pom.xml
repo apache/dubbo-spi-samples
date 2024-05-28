@@ -23,6 +23,7 @@
         <module>samples-spi-serialization-protostuff</module>
         <module>samples-spi-serialization-fury</module>
         <module>samples-spi-serialization-jackson</module>
+        <module>samples-spi-serialization-msgpack</module>
     </modules>
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
