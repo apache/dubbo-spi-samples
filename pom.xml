@@ -44,6 +44,10 @@
     <modules>
         <module>tools</module>
         <module>6-dubbo-spi-cluster-samples/samples-spi-cluster-broadcast1</module>
+        <module>9-dubbo-spi-serialize-samples/samples-spi-serialization</module>
+        <module>4-dubbo-spi-config-samples/samples-spi-configcenter</module>
+        <module>2-dubbo-spi-protocol-samples/samples-spi-protocol</module>
+        <module>3-dubbo-spi-registry-samples/samples-spi-registry</module>
     </modules>
 
     <dependencyManagement>
