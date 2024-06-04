@@ -43,6 +43,7 @@
 
     <modules>
         <module>tools</module>
+        <module>6-dubbo-spi-cluster-samples/samples-spi-cluster-broadcast1</module>
     </modules>
 
     <dependencyManagement>
