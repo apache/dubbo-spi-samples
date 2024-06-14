@@ -48,6 +48,7 @@
         <module>4-dubbo-spi-config-samples/samples-spi-configcenter</module>
         <module>2-dubbo-spi-protocol-samples/samples-spi-protocol</module>
         <module>3-dubbo-spi-registry-samples/samples-spi-registry</module>
+        <module>7-dubbo-spi-loadbalance-samples/samples-spi-loadbalance/</module>
     </modules>
 
     <dependencyManagement>
