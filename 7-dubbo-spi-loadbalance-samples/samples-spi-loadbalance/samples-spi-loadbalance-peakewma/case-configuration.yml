@@ -18,11 +18,18 @@ services:
     type: app
     basedir: .
     mainClass: org.apache.dubbo.samples.spi.loadbalance.Provider1
+    systemProps:
+      - zookeeper.address=zookeeper
+      - zookeeper.port=2181
+    waitPortsBeforeRun:
+      - zookeeper:2181
     checkPorts:
       - 20880
     checkLog: "dubbo service started"
+    depends_on:
+      - zookeeper
 
-  dubbo-samples-merge-provider2:
+  dubbo-samples-loadbalance-peakewma-provider2:
     type: app
     basedir: .
     mainClass: org.apache.dubbo.samples.spi.loadbalance.Provider2
@@ -33,14 +40,16 @@ services:
       - dubbo.port=20880
     checkPorts:
       - 20881
-    depends_on:
-      - dubbo-samples-loadbalance-peakewma-provider1
     waitPortsBeforeRun:
       - dubbo-samples-loadbalance-peakewma-provider1:2181
       - dubbo-samples-loadbalance-peakewma-provider1:20880
     checkLog: "dubbo service started"
+    depends_on:
+      - dubbo-samples-loadbalance-peakewma-provider1
+      - zookeeper
 
-  dubbo-samples-merge-consumer1:
+
+  dubbo-samples-loadbalance-peakewma-consumer:
     type: test
     basedir: .
     tests:
@@ -54,4 +63,5 @@ services:
     depends_on:
       - dubbo-samples-loadbalance-peakewma-provider1
       - dubbo-samples-loadbalance-peakewma-provider2
+      - zookeeper
 
