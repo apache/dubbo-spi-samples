@@ -95,18 +95,18 @@ public class DemoServiceIT {
         // Assert that the difference between the two provider call counts is greater than 80
         int diff = Math.abs(provider1Calls - provider2Calls);
         System.out.println("Difference: " + diff);
-        Assert.assertTrue("The difference between provider call counts should be greater than 70", diff > 60);
+        Assert.assertTrue("The difference between provider call counts should be greater than 60", diff > 60);
     }
 
     // Simulate a slow call to provider1
     private String slowProviderCall(int time) {
         try {
             // Simulate a time-consuming operation, such as a remote service call or database query
-            Thread.sleep(400 + time);
+            Thread.sleep(500 + time);
             time += 30;
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-        return "Hello world, response from provider: 172.20.10.2:20880";
+        return "Hello world, response from provider1";
     }
 }
