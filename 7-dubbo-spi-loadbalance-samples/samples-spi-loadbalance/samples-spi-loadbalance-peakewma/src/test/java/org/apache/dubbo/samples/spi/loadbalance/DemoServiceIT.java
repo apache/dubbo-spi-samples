@@ -28,6 +28,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -100,6 +102,14 @@ public class DemoServiceIT {
 
     // Simulate a slow call to provider1
     private String slowProviderCall(int time) {
+        String ipAddress = "unknown";
+        try {
+            InetAddress inetAddress = InetAddress.getLocalHost();
+            ipAddress = inetAddress.getHostAddress();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+
         try {
             // Simulate a time-consuming operation, such as a remote service call or database query
             Thread.sleep(500 + time);
@@ -107,6 +117,6 @@ public class DemoServiceIT {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-        return "Hello world, response from provider1";
+        return "Hello world, response from provider: " + ipAddress + ":20880";
     }
 }
