@@ -14,6 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 services:
+  zookeeper:
+    image: zookeeper:latest
+
   dubbo-samples-loadbalance-peakewma-provider1:
     type: app
     basedir: .
@@ -47,7 +50,6 @@ services:
     depends_on:
       - dubbo-samples-loadbalance-peakewma-provider1
       - zookeeper
-
 
   dubbo-samples-loadbalance-peakewma-consumer:
     type: test
