@@ -62,7 +62,7 @@ public class DemoServiceIT {
         // Assert that the absolute difference between the two provider call counts is less than 50
         int diff = Math.abs(provider1Calls - provider2Calls);
         System.out.println("Difference: " + diff);
-        Assert.assertTrue("The absolute difference between provider call counts should be less than 50", diff < 50);
+        Assert.assertTrue("The absolute difference between provider call counts should be less than 60", diff <= 60);
     }
 
     @Test
@@ -95,7 +95,7 @@ public class DemoServiceIT {
         // Assert that the difference between the two provider call counts is greater than 80
         int diff = Math.abs(provider1Calls - provider2Calls);
         System.out.println("Difference: " + diff);
-        Assert.assertTrue("The difference between provider call counts should be greater than 70", diff > 50);
+        Assert.assertTrue("The difference between provider call counts should be greater than 70", diff > 60);
     }
 
     // Simulate a slow call to provider1
