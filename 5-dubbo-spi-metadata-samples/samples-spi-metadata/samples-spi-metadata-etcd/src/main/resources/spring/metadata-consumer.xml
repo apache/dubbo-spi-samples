@@ -28,7 +28,8 @@
     <dubbo:application name="dubbo-spi-metadata-etcd-consumer"/>
 
     <dubbo:registry address="zookeeper://${zookeeper.address:127.0.0.1}:2181"/>
-    <dubbo:metadata-report address="etcd://${etcd.address:127.0.0.1}:2379"/>
+
+    <dubbo:metadata-report address="etcd://${etcd.address:localhost}:${etcd.port:2379}"/>
 
     <dubbo:reference id="demoService" interface="org.apache.dubbo.samples.spi.metadata.api.DemoService"/>
 </beans>

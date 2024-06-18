@@ -29,7 +29,7 @@
 
     <dubbo:registry address="zookeeper://${zookeeper.address:127.0.0.1}:2181"/>
 
-    <dubbo:metadata-report address="consul://${consul.address:127.0.0.1}:8500"/>
+    <dubbo:metadata-report address="consul://${consul.address:127.0.0.1}:${consul.port:8500}"/>
 
     <dubbo:reference id="demoService" interface="org.apache.dubbo.samples.spi.metadata.api.DemoService"/>
 </beans>
