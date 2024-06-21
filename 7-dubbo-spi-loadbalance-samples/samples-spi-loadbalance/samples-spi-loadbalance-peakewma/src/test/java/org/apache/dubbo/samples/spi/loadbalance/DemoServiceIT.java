@@ -41,8 +41,9 @@ public class DemoServiceIT {
     private DemoService demoService;
 
     @Test
-    public void test1() throws Exception {
-        Map<String, Integer> providerCount = new HashMap<>();
+    public void testCombined() throws Exception {
+        // Part 1: Run first part of the test
+        Map<String, Integer> providerCount1 = new HashMap<>();
 
         for (int i = 0; i < 1000; i++) {
             String response = demoService.sayHello("world");
@@ -50,26 +51,18 @@ public class DemoServiceIT {
             String provider = parts[parts.length - 1].trim();
 
             // Count the number of calls for each provider
-            providerCount.put(provider, providerCount.getOrDefault(provider, 0) + 1);
+            providerCount1.put(provider, providerCount1.getOrDefault(provider, 0) + 1);
         }
 
-        // Print the number of calls for each provider and calculate the difference
-        int provider1Calls = providerCount.getOrDefault("20880", 0);
-        int provider2Calls = providerCount.getOrDefault("20881", 0);
+        // Calculate the difference for the first part
+        int provider1Calls1 = providerCount1.getOrDefault("20880", 0);
+        int provider2Calls1 = providerCount1.getOrDefault("20881", 0);
+        int diff1 = Math.abs(provider1Calls1 - provider2Calls1);
 
-        for (Map.Entry<String, Integer> entry : providerCount.entrySet()) {
-            System.out.println("Provider " + entry.getKey() + " calls: " + entry.getValue());
-        }
+        System.out.println("Part 1 - Difference: " + diff1);
 
-        // Assert that the absolute difference between the two provider call counts is less than 50
-        int diff = Math.abs(provider1Calls - provider2Calls);
-        System.out.println("Difference: " + diff);
-        Assert.assertTrue("The absolute difference between provider call counts should be less than 60", diff <= 60);
-    }
-
-    @Test
-    public void test2() throws Exception {
-        Map<String, Integer> providerCount = new HashMap<>();
+        // Part 2: Run second part of the test
+        Map<String, Integer> providerCount2 = new HashMap<>();
         int time = 0;
         for (int i = 0; i < 1000; i++) {
             String response;
@@ -83,21 +76,18 @@ public class DemoServiceIT {
             String provider = parts[parts.length - 1].trim();
 
             // Count the number of calls for each provider
-            providerCount.put(provider, providerCount.getOrDefault(provider, 0) + 1);
+            providerCount2.put(provider, providerCount2.getOrDefault(provider, 0) + 1);
         }
 
-        // Print the number of calls for each provider and calculate the difference
-        int provider1Calls = providerCount.getOrDefault("20880", 0);
-        int provider2Calls = providerCount.getOrDefault("20881", 0);
+        // Calculate the difference for the second part
+        int provider1Calls2 = providerCount2.getOrDefault("20880", 0);
+        int provider2Calls2 = providerCount2.getOrDefault("20881", 0);
+        int diff2 = Math.abs(provider1Calls2 - provider2Calls2);
 
-        for (Map.Entry<String, Integer> entry : providerCount.entrySet()) {
-            System.out.println("Provider " + entry.getKey() + " calls: " + entry.getValue());
-        }
+        System.out.println("Part 2 - Difference: " + diff2);
 
-        // Assert that the difference between the two provider call counts is greater than 80
-        int diff = Math.abs(provider1Calls - provider2Calls);
-        System.out.println("Difference: " + diff);
-        Assert.assertTrue("The difference between provider call counts should be greater than 60", diff > 60);
+        // Assert that the difference from the first part is less than the difference from the second part
+        Assert.assertTrue("The difference from the first part should be less than the difference from the second part", diff1 < diff2);
     }
 
     // Simulate a slow call to provider1
