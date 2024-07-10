@@ -24,9 +24,6 @@ import org.apache.dubbo.config.annotation.DubboService;
 import org.apache.dubbo.rpc.RpcContext;
 import org.apache.dubbo.samples.spi.metadata.api.DemoService;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 @DubboService
 public class DemoServiceImpl implements DemoService {
 
