@@ -21,10 +21,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.apache.dubbo.extensions</groupId>
-        <artifactId>extensions-parent</artifactId>
-        <version>${revision}</version>
-        <relativePath>../pom.xml</relativePath>
+        <groupId>org.apache.dubbo</groupId>
+        <artifactId>dubbo-samples-spi</artifactId>
+        <version>1.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>dubbo-extensions-test</artifactId>
