@@ -35,7 +35,7 @@
         <zookeeper.version>3.8.4</zookeeper.version>
         <metrics.version>4.1.12.1</metrics.version>
         <snappy.version>1.1.10.5</snappy.version>
-        <protobuf-java.version>3.24.3</protobuf-java.version>
+        <protobuf-java.version>3.25.5</protobuf-java.version>
         <junit.version>4.13.1</junit.version>
     </properties>
 
