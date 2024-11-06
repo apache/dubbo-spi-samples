@@ -32,7 +32,7 @@ public class DemoServiceIT {
     @Test
     public void test() throws Exception {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
-            HttpPost request = new HttpPost("http://localhost:20880/demo/sayHello");
+            HttpPost request = new HttpPost("http://dubbo-samples-spi-rest:20880/demo/sayHello");
             request.setHeader("Content-Type", "application/json");
             String json = "world";
             StringEntity entity = new StringEntity(json);
