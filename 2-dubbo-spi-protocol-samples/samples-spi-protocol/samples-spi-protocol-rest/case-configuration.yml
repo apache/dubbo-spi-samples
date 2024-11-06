@@ -36,6 +36,6 @@ services:
       - zookeeper.port=2181
     waitPortsBeforeRun:
       - dubbo-samples-spi-rest:2181
-      - dubbo-samples-spi-rest:9000
+      - dubbo-samples-spi-rest:8310
     depends_on:
       - dubbo-samples-spi-rest
