@@ -15,6 +15,7 @@
     <modules>
         <module>samples-spi-protocol-http</module>
         <module>samples-spi-protocol-rmi</module>
+        <module>samples-spi-protocol-rest</module>
     </modules>
 
     <properties>
