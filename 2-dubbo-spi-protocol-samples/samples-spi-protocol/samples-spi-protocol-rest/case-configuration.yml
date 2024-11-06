@@ -21,9 +21,9 @@ services:
     systemProps:
       - zookeeper.address=dubbo-samples-spi-rest
       - zookeeper.port=2181
-      - rest.port=8081
+      - rest.port=9000
     checkPorts:
-      - 8081
+      - 9000
     checkLog: "dubbo service started"
 
   dubbo-samples-spi-rest-test:
@@ -36,6 +36,6 @@ services:
       - zookeeper.port=2181
     waitPortsBeforeRun:
       - dubbo-samples-spi-rest:2181
-      - dubbo-samples-spi-rest:8081
+      - dubbo-samples-spi-rest:9000
     depends_on:
       - dubbo-samples-spi-rest

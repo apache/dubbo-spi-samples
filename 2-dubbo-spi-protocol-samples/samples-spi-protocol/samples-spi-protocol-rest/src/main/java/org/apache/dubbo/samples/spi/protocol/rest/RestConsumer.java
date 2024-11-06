@@ -31,9 +31,8 @@ import org.apache.http.util.EntityUtils;
 public class RestConsumer {
 
     public static void main(String[] args) throws Exception {
-        CloseableHttpClient httpClient = HttpClients.createDefault();
-        try {
-            HttpPost request = new HttpPost("http://localhost:8081/demo/sayHello");
+        try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
+            HttpPost request = new HttpPost("http://localhost:9000/demo/sayHello");
             request.setHeader("Content-Type", "application/json");
             String json = "world";
             StringEntity entity = new StringEntity(json);
@@ -46,8 +45,6 @@ public class RestConsumer {
                     System.out.println(result);
                 }
             }
-        } finally {
-            httpClient.close();
         }
     }
 }
