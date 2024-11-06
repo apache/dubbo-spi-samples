@@ -25,18 +25,14 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:/spring/http-consumer.xml"})
+
 public class DemoServiceIT {
 
     @Test
     public void test() throws Exception {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
-            HttpPost request = new HttpPost("http://localhost:8310/demo/sayHello");
+            HttpPost request = new HttpPost("http://localhost:20800/demo/sayHello");
             request.setHeader("Content-Type", "application/json");
             String json = "world";
             StringEntity entity = new StringEntity(json);

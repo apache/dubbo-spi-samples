@@ -32,7 +32,7 @@ public class RestConsumer {
 
     public static void main(String[] args) throws Exception {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
-            HttpPost request = new HttpPost("http://localhost:8310/demo/sayHello");
+            HttpPost request = new HttpPost("http://localhost:20800/demo/sayHello");
             request.setHeader("Content-Type", "application/json");
             String json = "world";
             StringEntity entity = new StringEntity(json);
