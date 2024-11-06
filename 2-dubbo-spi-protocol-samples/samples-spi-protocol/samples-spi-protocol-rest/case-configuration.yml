@@ -19,7 +19,7 @@ services:
     basedir: .
     mainClass: org.apache.dubbo.samples.spi.protocol.rest.RestProvider
     systemProps:
-      - zookeeper.address=localhost
+      - zookeeper.address=dubbo-samples-spi-rest
       - zookeeper.port=2181
       - rest.port=20800
     checkPorts:
@@ -32,9 +32,8 @@ services:
     tests:
       - "**/*IT.class"
     systemProps:
-      - zookeeper.address=localhost
+      - zookeeper.address=dubbo-samples-spi-rest
       - zookeeper.port=2181
-      - service.url=http://localhost:20800
     waitPortsBeforeRun:
       - dubbo-samples-spi-rest:2181
       - dubbo-samples-spi-rest:20800
