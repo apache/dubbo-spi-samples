@@ -16,39 +16,24 @@
  */
 
 
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
+import org.apache.dubbo.samples.spi.protocol.rest.api.DemoService;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {"classpath:/spring/http-consumer.xml"})
 public class DemoServiceIT {
 
+    @Autowired
+    private DemoService demoService;
+
     @Test
-    public void test() throws Exception {
-        try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
-            HttpPost request = new HttpPost("http://dubbo-samples-spi-rest:20880/demo/sayHello");
-            request.setHeader("Content-Type", "application/json");
-
-            String json = "{\"message\":\"world\"}";
-            StringEntity entity = new StringEntity(json, ContentType.APPLICATION_JSON);
-            request.setEntity(entity);
-
-            try (CloseableHttpResponse response = httpClient.execute(request)) {
-                HttpEntity responseEntity = response.getEntity();
-                if (responseEntity != null) {
-                    String result = EntityUtils.toString(responseEntity);
-                    System.out.println("Response: " + result);
-                    Assert.assertTrue(result.startsWith("Hello"));
-                }
-            }
-        }
+    public void test() {
+        Assert.assertTrue(demoService.sayHello("world").startsWith("Hello world"));
     }
 
 }
