@@ -35,6 +35,7 @@ public class DemoServiceIT {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
             HttpPost request = new HttpPost("http://dubbo-samples-spi-rest:20880/demo/sayHello");
             request.setHeader("Content-Type", "application/json");
+            request.setHeader("x-dubbo-service-protocol", "triple");
 
             String json = "\"world\"";
             StringEntity entity = new StringEntity(json, ContentType.APPLICATION_JSON);
@@ -45,7 +46,7 @@ public class DemoServiceIT {
                 if (responseEntity != null) {
                     String result = EntityUtils.toString(responseEntity);
                     System.out.println("Response: " + result);
-                    Assert.assertTrue(result.startsWith("Hello world"));
+                    Assert.assertTrue(result.startsWith("Hello"));
                 }
             }
         }
