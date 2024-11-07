@@ -35,9 +35,8 @@ public class DemoServiceIT {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
             HttpPost request = new HttpPost("http://dubbo-samples-spi-rest:20880/demo/sayHello");
             request.setHeader("Content-Type", "application/json");
-            request.setHeader("x-dubbo-service-protocol", "triple");
 
-            String json = "\"world\"";
+            String json = "{\"message\":\"world\"}";
             StringEntity entity = new StringEntity(json, ContentType.APPLICATION_JSON);
             request.setEntity(entity);
 
