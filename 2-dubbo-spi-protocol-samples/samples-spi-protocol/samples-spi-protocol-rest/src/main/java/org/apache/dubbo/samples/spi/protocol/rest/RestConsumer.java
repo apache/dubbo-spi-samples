@@ -20,31 +20,16 @@
 package org.apache.dubbo.samples.spi.protocol.rest;
 
 
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
+import org.apache.dubbo.samples.spi.protocol.rest.api.DemoService;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class RestConsumer {
 
-    public static void main(String[] args) throws Exception {
-        try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
-            HttpPost request = new HttpPost("http://localhost:20880/demo/sayHello");
-            request.setHeader("Content-Type", "application/json");
-            String json = "world";
-            StringEntity entity = new StringEntity(json);
-            request.setEntity(entity);
+    public static void main(String[] args) {
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring/http-consumer.xml");
+        context.start();
 
-            try (CloseableHttpResponse response = httpClient.execute(request)) {
-                HttpEntity responseEntity = response.getEntity();
-                if (responseEntity != null) {
-                    String result = EntityUtils.toString(responseEntity);
-                    System.out.println(result);
-                }
-            }
-        }
+        DemoService demoService = (DemoService) context.getBean("demoService");
+        System.out.println("RestConsumer result: " + demoService.sayHello("world"));
     }
 }
