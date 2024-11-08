@@ -19,6 +19,8 @@
 
 package org.apache.dubbo.samples.spi.protocol.rest.impl;
 
+import org.apache.dubbo.samples.spi.protocol.rest.MyObject;
+import org.apache.dubbo.samples.spi.protocol.rest.MyXmlObject;
 import org.apache.dubbo.samples.spi.protocol.rest.api.DemoService;
 import org.apache.dubbo.rpc.RpcContext;
 
@@ -32,4 +34,18 @@ public class DemoServiceImpl implements DemoService {
                 ", request from consumer: " + RpcContext.getContext().getRemoteAddress());
         return "Hello " + name + ", response from provider: " + RpcContext.getContext().getLocalAddress();
     }
+
+    @Override
+    public String sayJson(MyObject obj) {
+        // Assuming MyObject has a method getName() that returns a String
+        return "Hello " + obj.getName();
+    }
+
+
+    @Override
+    public String sayXml(MyXmlObject obj) {
+        return "Hello " + obj.getValue();
+    }
+
+
 }

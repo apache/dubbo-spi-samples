@@ -20,12 +20,30 @@
 package org.apache.dubbo.samples.spi.protocol.rest.api;
 
 
+import org.apache.dubbo.samples.spi.protocol.rest.MyObject;
+import org.apache.dubbo.samples.spi.protocol.rest.MyXmlObject;
+
+import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 @Path("/demo")
 public interface DemoService {
         @POST
         @Path("/sayHello")
         String sayHello(String name);
+
+        @POST
+        @Path("/sayJson")
+        @Consumes(MediaType.APPLICATION_JSON)
+        @Produces(MediaType.TEXT_PLAIN)
+        String sayJson(MyObject obj);
+
+        @POST
+        @Path("/sayXml")
+        @Consumes(MediaType.TEXT_XML)
+        @Produces(MediaType.TEXT_PLAIN)
+        String sayXml(MyXmlObject obj);
 }

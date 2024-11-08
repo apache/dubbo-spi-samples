@@ -16,6 +16,8 @@
  */
 
 
+import org.apache.dubbo.samples.spi.protocol.rest.MyObject;
+import org.apache.dubbo.samples.spi.protocol.rest.MyXmlObject;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.http.HttpEntity;
@@ -23,9 +25,13 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
+import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Arrays;
 
 public class DemoServiceIT {
 
@@ -56,5 +62,48 @@ public class DemoServiceIT {
         System.out.println("Response: " + response.getBody());
         Assert.assertTrue(response.getBody().startsWith("Hello world"));
     }
+
+    @Test
+    public void testPostJson() {
+        RestTemplate restTemplate = new RestTemplate();
+
+        MyObject myObject = new MyObject();
+        myObject.setName("world");
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<MyObject> requestEntity = new HttpEntity<>(myObject, headers);
+
+        ResponseEntity<String> response = restTemplate.postForEntity(toUri("demo/sayJson"), requestEntity, String.class);
+
+        System.out.println("Response: " + response.getBody());
+        Assert.assertTrue(response.getBody().contains("Hello world"));
+    }
+
+
+    @Test
+    public void testPostXml() {
+
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.setMessageConverters(Arrays.asList(
+                new Jaxb2RootElementHttpMessageConverter(),
+                new StringHttpMessageConverter()
+        ));
+
+        MyXmlObject xmlObject = new MyXmlObject();
+        xmlObject.setValue("world");
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.TEXT_XML);
+
+        HttpEntity<MyXmlObject> requestEntity = new HttpEntity<>(xmlObject, headers);
+
+        ResponseEntity<String> response = restTemplate.postForEntity(toUri("demo/sayXml"), requestEntity, String.class);
+
+        System.out.println("Response: " + response.getBody());
+        Assert.assertTrue(response.getBody().contains("Hello world"));
+    }
+
 
 }
