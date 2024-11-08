@@ -16,24 +16,45 @@
  */
 
 
-import org.apache.dubbo.samples.spi.protocol.rest.api.DemoService;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:/spring/http-consumer.xml"})
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
+
 public class DemoServiceIT {
 
-    @Autowired
-    private DemoService demoService;
+    protected static final String HOST = System.getProperty("zookeeper.address", "localhost");
+
+    protected static String toUri(String path) {
+        return "http://" + HOST + ":20880/" + path;
+    }
 
     @Test
     public void test() {
-        Assert.assertTrue(demoService.sayHello("world").startsWith("Hello world"));
+        RestTemplate restTemplate = new RestTemplate();
+
+        // Create form data
+        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+        map.add("number", "world");
+
+        // Set the request header
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+        // create a request entity
+        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(map, headers);
+
+        // send a post request
+        ResponseEntity<String> response = restTemplate.postForEntity(toUri("demo/sayHello"), requestEntity, String.class);
+
+        System.out.println("Response: " + response.getBody());
+        Assert.assertTrue(response.getBody().startsWith("Hello world"));
     }
 
 }

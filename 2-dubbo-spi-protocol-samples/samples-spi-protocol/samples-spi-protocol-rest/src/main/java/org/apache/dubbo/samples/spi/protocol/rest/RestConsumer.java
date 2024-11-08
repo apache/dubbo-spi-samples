@@ -20,16 +20,41 @@
 package org.apache.dubbo.samples.spi.protocol.rest;
 
 
-import org.apache.dubbo.samples.spi.protocol.rest.api.DemoService;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
 public class RestConsumer {
 
-    public static void main(String[] args) {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring/http-consumer.xml");
-        context.start();
+    protected static final String HOST = System.getProperty("zookeeper.address", "localhost");
 
-        DemoService demoService = (DemoService) context.getBean("demoService");
-        System.out.println("RestConsumer result: " + demoService.sayHello("world"));
+    protected static String toUri(String path) {
+        return "http://" + HOST + ":20880/" + path;
+    }
+
+    public static void main(String[] args) {
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        // create form data
+        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+        map.add("number", "1");
+
+        // set the request header
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+
+        // create a request entity
+        HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(map, headers);
+
+        // send a post request
+        ResponseEntity<String> response = restTemplate.postForEntity(toUri("demo/sayHello"), requestEntity, String.class);
+
+        System.out.println("Response: " + response.getBody());
+
     }
 }
