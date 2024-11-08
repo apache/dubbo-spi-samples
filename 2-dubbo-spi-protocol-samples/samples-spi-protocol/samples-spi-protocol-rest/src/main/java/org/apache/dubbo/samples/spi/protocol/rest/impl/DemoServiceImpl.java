@@ -38,12 +38,17 @@ public class DemoServiceImpl implements DemoService {
     @Override
     public String sayJson(MyObject obj) {
         // Assuming MyObject has a method getName() that returns a String
+        System.out.println("[" + new SimpleDateFormat("HH:mm:ss").format(new Date()) + "] Hello " + obj.getName() +
+                ", request from consumer: " + RpcContext.getContext().getRemoteAddress());
         return "Hello " + obj.getName();
     }
 
 
     @Override
     public String sayXml(MyXmlObject obj) {
+        // Assuming MyXmlObject has a method getValue() that returns a String
+        System.out.println("[" + new SimpleDateFormat("HH:mm:ss").format(new Date()) + "] Hello " + obj.getValue() +
+                ", request from consumer: " + RpcContext.getContext().getRemoteAddress());
         return "Hello " + obj.getValue();
     }
 
