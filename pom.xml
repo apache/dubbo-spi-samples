@@ -49,6 +49,7 @@
         <module>2-dubbo-spi-protocol-samples/samples-spi-protocol</module>
         <module>3-dubbo-spi-registry-samples/samples-spi-registry</module>
         <module>7-dubbo-spi-loadbalance-samples/samples-spi-loadbalance/</module>
+        <module>6-dubbo-spi-cluster-samples/samples-spi-cluster-router-mesh</module>
     </modules>
 
     <dependencyManagement>
