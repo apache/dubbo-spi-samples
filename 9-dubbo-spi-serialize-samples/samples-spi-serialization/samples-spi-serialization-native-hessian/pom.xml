@@ -99,7 +99,8 @@
         <dependency>
             <groupId>org.apache.dubbo.extensions</groupId>
             <artifactId>dubbo-serialization-native-hession</artifactId>
-            <version>${spi.version}</version>
+            <!-- 3.3.0 not support -->
+            <version>3.2.0</version>
         </dependency>
 
         <dependency>
