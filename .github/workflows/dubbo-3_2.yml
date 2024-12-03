@@ -160,7 +160,7 @@ jobs:
           path: ~/.m2/repository/org/apache/dubbo
           key: ${{ runner.os }}-dubbo-snapshot-${{needs.build-dubbo.outputs.commit_id}}
       - name: Download test list
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4.1.7
         with:
           name: test-list
           path: test/jobs/
@@ -195,7 +195,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Download test result
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4.1.7
         with:
           name: test-result
           path: test/jobs/
