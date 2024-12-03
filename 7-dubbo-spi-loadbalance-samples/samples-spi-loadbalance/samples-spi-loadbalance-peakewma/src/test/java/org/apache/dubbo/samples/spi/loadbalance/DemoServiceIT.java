@@ -19,12 +19,13 @@
 
 package org.apache.dubbo.samples.spi.loadbalance;
 
+import org.apache.dubbo.config.annotation.DubboReference;
+import org.apache.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.apache.dubbo.samples.spi.loadbalance.api.DemoService;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -33,65 +34,98 @@ import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
+@EnableDubbo
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath*:spring/configcenter-consumer.xml")
 public class DemoServiceIT {
-    @Autowired
-    @Qualifier("demoService")
+
+    @DubboReference
     private DemoService demoService;
 
     @Test
     public void testCombined() throws Exception {
-        // Part 1: Run first part of the test
+        // Warm-up phase
+        warmUp(100);
+
+        // Part 1: Normal requests
         Map<String, Integer> providerCount1 = new HashMap<>();
+        int totalRequests = 1000;
 
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < totalRequests; i++) {
             String response = demoService.sayHello("world");
-            String[] parts = response.split(":");
-            String provider = parts[parts.length - 1].trim();
-
-            // Count the number of calls for each provider
+            String provider = extractProvider(response);
             providerCount1.put(provider, providerCount1.getOrDefault(provider, 0) + 1);
         }
 
-        // Calculate the difference for the first part
+        // Calculate the ratio for the first part
         int provider1Calls1 = providerCount1.getOrDefault("20880", 0);
         int provider2Calls1 = providerCount1.getOrDefault("20881", 0);
-        int diff1 = Math.abs(provider1Calls1 - provider2Calls1);
+        double ratio1 = (double) provider1Calls1 / provider2Calls1;
 
-        System.out.println("Part 1 - Difference: " + diff1);
+        System.out.println("Part 1 - Provider1 Calls: " + provider1Calls1 + ", Provider2 Calls: " + provider2Calls1 + ", Ratio: " + ratio1);
 
-        // Part 2: Run second part of the test
+        // Part 2: Mixed requests with 10% slow calls
         Map<String, Integer> providerCount2 = new HashMap<>();
-        int time = 0;
-        for (int i = 0; i < 1000; i++) {
+        int slowCallInterval = 10; // Every 10 requests, make a slow call
+        int slowCallDelay = 1000; // Slow call delay of 1 second
+
+        for (int i = 0; i < totalRequests; i++) {
             String response;
-            // Make provider1 slow every 10 requests
-            if (i % 10 == 0) {
-                response = slowProviderCall(time);
+            if (i % slowCallInterval == 0) {
+                response = slowProviderCall(slowCallDelay);
             } else {
                 response = demoService.sayHello("world");
             }
-            String[] parts = response.split(":");
-            String provider = parts[parts.length - 1].trim();
-
-            // Count the number of calls for each provider
+            String provider = extractProvider(response);
             providerCount2.put(provider, providerCount2.getOrDefault(provider, 0) + 1);
         }
 
-        // Calculate the difference for the second part
+        // Calculate the ratio for the second part
         int provider1Calls2 = providerCount2.getOrDefault("20880", 0);
         int provider2Calls2 = providerCount2.getOrDefault("20881", 0);
-        int diff2 = Math.abs(provider1Calls2 - provider2Calls2);
+        double ratio2 = (double) provider1Calls2 / provider2Calls2;
 
-        System.out.println("Part 2 - Difference: " + diff2);
+        System.out.println("Part 2 - Provider1 Calls: " + provider1Calls2 + ", Provider2 Calls: " + provider2Calls2 + ", Ratio: " + ratio2);
 
-        // Assert that the difference from the first part is less than the difference from the second part
-        Assert.assertTrue("The difference from the first part should be less than the difference from the second part", diff1 < diff2);
+        // Assert that the ratio from the first part is less than the ratio from the second part
+        Assert.assertTrue("The ratio in the first part should be less than the ratio in the second part", ratio1 < ratio2);
     }
 
-    // Simulate a slow call to provider1
-    private String slowProviderCall(int time) {
+    /**
+     * Warm-up method to send a certain number of requests to stabilize the load balancer.
+     *
+     * @param warmUpRequests Number of warm-up requests to send.
+     */
+    private void warmUp(int warmUpRequests) {
+        for (int i = 0; i < warmUpRequests; i++) {
+            demoService.sayHello("warmup");
+        }
+        System.out.println("Warm-up completed with " + warmUpRequests + " requests.");
+    }
+
+    /**
+     * Extracts the provider identifier (port number) from the response string.
+     *
+     * @param response The response string containing the provider information.
+     * @return The provider identifier (port number) or "unknown" if extraction fails.
+     */
+    private String extractProvider(String response) {
+        // Assume the response format is "Hello world, response from provider: <IP>:<PORT>"
+        String[] parts = response.split(":");
+        if (parts.length >= 2) {
+            return parts[parts.length - 1].trim();
+        } else {
+            return "unknown";
+        }
+    }
+
+    /**
+     * Simulates a slow call to provider1 by introducing a delay.
+     *
+     * @param delay The delay in milliseconds to simulate a slow response.
+     * @return A response string indicating the provider.
+     */
+    private String slowProviderCall(int delay) {
         String ipAddress = "unknown";
         try {
             InetAddress inetAddress = InetAddress.getLocalHost();
@@ -102,8 +136,7 @@ public class DemoServiceIT {
 
         try {
             // Simulate a time-consuming operation, such as a remote service call or database query
-            Thread.sleep(500 + time);
-            time += 30;
+            Thread.sleep(delay);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
