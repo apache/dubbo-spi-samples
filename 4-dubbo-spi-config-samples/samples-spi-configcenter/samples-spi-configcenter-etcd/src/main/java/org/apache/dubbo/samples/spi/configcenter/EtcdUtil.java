@@ -21,8 +21,8 @@ package org.apache.dubbo.samples.spi.configcenter;
 
 import io.etcd.jetcd.ByteSequence;
 import io.etcd.jetcd.Client;
+import io.etcd.jetcd.launcher.Etcd;
 import io.etcd.jetcd.launcher.EtcdCluster;
-import io.etcd.jetcd.launcher.EtcdClusterFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,12 +41,15 @@ public class EtcdUtil {
 
     public static void start() {
         try {
-            etcdCluster = EtcdClusterFactory.buildCluster(EtcdUtil.class.getSimpleName(), 3, false);
+            etcdCluster = Etcd.builder()
+                    .withClusterName(EtcdUtil.class.getSimpleName())
+                    .withNodes(3)
+                    .build();
 
             etcdCluster.start();
-            client = Client.builder().endpoints(etcdCluster.getClientEndpoints()).build();
+            client = Client.builder().endpoints(etcdCluster.clientEndpoints()).build();
 
-            List<URI> clientEndPoints = etcdCluster.getClientEndpoints();
+            List<URI> clientEndPoints = etcdCluster.clientEndpoints();
 
             String ipAddress = clientEndPoints.get(0).getHost() + ":" + clientEndPoints.get(0).getPort(); //"127.0.0.1:2379";
 
